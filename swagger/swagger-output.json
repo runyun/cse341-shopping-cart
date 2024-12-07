@@ -10,7 +10,7 @@
     },
     "version": "1.0.0"
   },
-  "host": "https://cse341-shopping-cart.onrender.com",
+  "host": "cse341-shopping-cart.onrender.com",
   "basePath": "/",
   "schemes": [
     "https",
