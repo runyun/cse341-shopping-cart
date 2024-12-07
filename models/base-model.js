@@ -49,7 +49,7 @@ baseModel.getItemByUserIdAndItemName = async function (userId, itemName) {
         const db = await dbConfig.connectDB();
         const itemCollection = dbConfig.connectItemCollection(db);
 
-        const item = await itemCollection.findOne({_id:new ObjectId(itemId)});
+        const item = await itemCollection.findOne({user_id: userId, name: itemName});
 
         return item;
 
@@ -95,12 +95,13 @@ baseModel.insertItem = async function(data){
 
 baseModel.updateUser = async function(id, data){
     try {
-        const userCollection = await dbConfig.connectUserCollection();
+        const db = await dbConfig.connectDB();
+        const userCollection = await dbConfig.connectUserCollection(db);
         const filter = {_id: new ObjectId(id)};
         const updateData = {
             $set: {
-                firstName: data.firstName,
-                lastName: data.lastName,
+                first_name: data.first_name,
+                last_name: data.last_name,
                 email: data.email
             }
         }
@@ -120,7 +121,8 @@ baseModel.updateUser = async function(id, data){
 
 baseModel.updateItem = async function(id, itemName, data){
     try {
-        const itemCollection = await dbConfig.connectItemCollection();
+        const db = await dbConfig.connectDB();
+        const itemCollection = await dbConfig.connectItemCollection(db);
         const filter = {_id: new ObjectId(id), name: itemName};
         const updateData = {
             $set: {
@@ -148,16 +150,18 @@ baseModel.updateItem = async function(id, itemName, data){
 }
 
 baseModel.deleteUserById = async function(id){
-    const userCollection = await dbConfig.connectUserCollection();
+    const db = await dbConfig.connectDB();
+    const userCollection = await dbConfig.connectUserCollection(db);
     const filter = {_id: new ObjectId(id)};
     const result = await userCollection.deleteOne(filter);
 
     return result;
 }
 
-baseModel.deleteItemById = async function(id){
-    const itemCollection = await dbConfig.connectItemCollection();
-    const filter = {_id: new ObjectId(id)};
+baseModel.deleteItemByUserIdAndItemName = async function(userId, itemName){
+    const db = await dbConfig.connectDB();
+    const itemCollection = await dbConfig.connectItemCollection(db);
+    const filter = {user_id: userId, name: itemName};
     const result = await itemCollection.deleteOne(filter);
 
     return result;

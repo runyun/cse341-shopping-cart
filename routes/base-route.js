@@ -37,13 +37,13 @@ router.post('/createItem',
 
 
 
-router.put('/updateUser/:userId',
+router.put('/updateUser',
     validator.validateUserId,
     validator.validateUser,
     validationErrorHandler,
     baseController.updateUser);
 
-router.put('/updateItem/:userId&itemName',
+router.put('/updateItem',
     validator.validateUserId,
     validator.validateItemName,
     validator.validateItem,
@@ -52,12 +52,12 @@ router.put('/updateItem/:userId&itemName',
 
 
 
-router.delete('/deleteUser/:userId',
+router.delete('/deleteUser',
     validator.validateUserId,
     validationErrorHandler,
     baseController.deleteUser);
 
-router.delete('/deleteItem/:userId&itemName', 
+router.delete('/deleteItem', 
     validator.validateUserId,
     validator.validateItemName,
     validationErrorHandler,

@@ -57,7 +57,7 @@ baseController.addItem = async function(req, res){
 
 baseController.updateUser = async function(req, res){
     try {
-        const userId = req.params.userId;
+        const userId = req.query.userId;
         const {first_name, last_name, email} = req.body;
         const result = await baseModel.updateUser(userId, req.body);
 
@@ -71,7 +71,7 @@ baseController.updateUser = async function(req, res){
 
 baseController.updateItem = async function(req, res){
     try {
-        const {userId, itemName} = req.params;
+        const {userId, itemName} = req.query;
         const {amount, color, from_country, to_country, purchase_date, is_paid} = req.body;
         const result = await baseModel.updateItem(userId, itemName, req.body);
 
@@ -85,7 +85,7 @@ baseController.updateItem = async function(req, res){
 
 baseController.deleteUser = async function(req, res){
     try {
-        const deleteId = req.params.id;
+        const deleteId = req.query.userId;
         const result = await baseModel.deleteUserById(deleteId);
 
         res.status(200).send(result);
@@ -98,8 +98,8 @@ baseController.deleteUser = async function(req, res){
 
 baseController.deleteItem = async function(req, res){
     try {
-        const deleteId = req.params.id;
-        const result = await baseModel.deleteItemById(deleteId);
+        const {userId, itemName} = req.query;
+        const result = await baseModel.deleteItemByUserIdAndItemName(userId, itemName);
 
         res.status(200).send(result);
         
