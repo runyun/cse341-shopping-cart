@@ -10,11 +10,11 @@
     },
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "https://cse341-shopping-cart.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http",
-    "https"
+    "https",
+    "http"
   ],
   "paths": {
     "/base/getUser": {

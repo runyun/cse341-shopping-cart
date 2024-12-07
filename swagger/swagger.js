@@ -11,9 +11,9 @@ const doc = {
         },
     },
     host: 'localhost:3000',
-    // host: 'cse341-contact-api.onrender.com',
-    // schemes: ['https', 'http']
-    schemes: ['http', 'https']
+    host: 'https://cse341-shopping-cart.onrender.com',
+    schemes: ['https', 'http']
+    // schemes: ['http', 'https']
 };
 
 const outputFile = './swagger-output.json';
