@@ -12,10 +12,6 @@ baseController.getUserById = async function(req, res){
     const userId = req.query.userId;
     const result = await baseModel.getUserById(userId);
 
-    if (!result) {
-        return res.status(204).send(); 
-    }
-    
     res.json(result);
 }
 
@@ -23,20 +19,12 @@ baseController.getItemsByUserId = async function(req, res){
     const userId = req.query.userId;
     const result = await baseModel.getItemsByUserId(userId);
 
-    if (!result) {
-        return res.status(204).send(); 
-    }
-
     res.json(result);
 }
  
 baseController.getItemByUserIdAndItemName = async function(req, res){
     const {userId, itemName} = req.query;
     const result = await baseModel.getItemByUserIdAndItemName(userId, itemName);
-
-    if (!result) {
-        return res.status(204).send(); 
-    }
 
     res.json(result);
 }
@@ -73,7 +61,11 @@ baseController.updateUser = async function(req, res){
         const {first_name, last_name, email} = req.body;
         const result = await baseModel.updateUser(userId, req.body);
 
-        res.status(200).send(result);
+        if (result) {
+            return res.status(204).send(); 
+        }
+
+        return res.status(404).json({ error: "user not found or could not be updated" });
         
     } catch (error) {
         res.status(500).send('Error update user');
@@ -87,7 +79,12 @@ baseController.updateItem = async function(req, res){
         const {amount, color, from_country, to_country, purchase_date, is_paid} = req.body;
         const result = await baseModel.updateItem(userId, itemName, req.body);
 
-        res.status(200).send(result);
+        if (result) {
+            return res.status(204).send(); 
+        }
+
+        return res.status(404).json({ error: "Item not found or could not be updated" });
+        
         
     } catch (error) {
         res.status(500).send('Error update item');
@@ -100,7 +97,11 @@ baseController.deleteUser = async function(req, res){
         const deleteId = req.query.userId;
         const result = await baseModel.deleteUserById(deleteId);
 
-        res.status(200).send(result);
+        if (result) {
+            return res.status(204).send(); 
+        }
+
+        return res.status(404).json({ error: "User not found" });
         
     } catch (error) {
         res.status(500).send('Error delete user');
@@ -113,7 +114,11 @@ baseController.deleteItem = async function(req, res){
         const {userId, itemName} = req.query;
         const result = await baseModel.deleteItemByUserIdAndItemName(userId, itemName);
 
-        res.status(200).send(result);
+        if (result) {
+            return res.status(204).send(); 
+        }
+
+        return res.status(404).json({ error: "Item not found" });
         
     } catch (error) {
         res.status(500).send('Error delete item');

@@ -11,7 +11,7 @@ const doc = {
         },
     },
     // host: 'localhost:3000',
-    host: 'https://cse341-shopping-cart.onrender.com',
+    host: 'cse341-shopping-cart.onrender.com',
     schemes: ['https', 'http']
     // schemes: ['http', 'https']
 };
