@@ -11,6 +11,10 @@ baseController.getUserById = async function(req, res){
 
     const userId = req.query.userId;
     const result = await baseModel.getUserById(userId);
+
+    if (!result) {
+        return res.status(204).send(); 
+    }
     
     res.json(result);
 }
@@ -19,12 +23,20 @@ baseController.getItemsByUserId = async function(req, res){
     const userId = req.query.userId;
     const result = await baseModel.getItemsByUserId(userId);
 
+    if (!result) {
+        return res.status(204).send(); 
+    }
+
     res.json(result);
 }
  
 baseController.getItemByUserIdAndItemName = async function(req, res){
     const {userId, itemName} = req.query;
     const result = await baseModel.getItemByUserIdAndItemName(userId, itemName);
+
+    if (!result) {
+        return res.status(204).send(); 
+    }
 
     res.json(result);
 }
