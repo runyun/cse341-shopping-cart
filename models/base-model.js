@@ -108,12 +108,7 @@ baseModel.updateUser = async function(id, data){
 
         const result = await userCollection.updateOne(filter, updateData);
 
-        if (result.matchedCount === 0) {
-            console.log('No data been updated.');
-
-        } else {
-            console.log('Updated successfully:', result.modifiedCount);
-        }
+        return result;
     } catch (error) {
         console.error('update data failed - ', error); 
     }
@@ -138,12 +133,7 @@ baseModel.updateItem = async function(id, itemName, data){
 
         const result = await itemCollection.updateOne(filter, updateData);
 
-        if (result.matchedCount === 0) {
-            console.log('No data been updated.');
-
-        } else {
-            console.log('Updated successfully:', result.modifiedCount);
-        }
+        return result;
     } catch (error) {
         console.error('update data failed - ', error); 
     }
